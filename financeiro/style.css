@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800&display=swap');
+
+body { 
+    font-family: 'Montserrat', sans-serif; 
+    font-size: 14px;
+    overflow-x: hidden;
+}
+
+select option {
+    background-color: #0f172a;
+    color: #e2e8f0;
+    font-weight: 600;
+}
+
+.bg-profundo {
+    background: radial-gradient(circle at center, #111827 0%, #030712 100%);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -2;
+}
+
+.particulas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.particula {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(5px);
+    animation: flutuar infinite linear;
+}
+
+@keyframes flutuar {
+    0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+}
+
+@keyframes entradaSuave {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes brilhoTexto {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+.anima-entrada {
+    animation: entradaSuave 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.titulo-brilhante {
+    background: linear-gradient(90deg, #22d3ee, #3b82f6, #a855f7, #22d3ee);
+    background-size: 300%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: brilhoTexto 10s linear infinite;
+}
+
+#tela-onboarding {
+    background: radial-gradient(circle at center, #111827 0%, #010409 100%);
+}
+
+.oculto {
+    display: none !important;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
