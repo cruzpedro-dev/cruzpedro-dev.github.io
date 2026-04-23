@@ -13,6 +13,56 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
+        #progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, #22d3ee, #3b82f6);
+            box-shadow: 0 0 15px #22d3ee;
+            z-index: 1000000;
+            transition: width 0.1s ease-out;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .anima-float {
+            animation: float 4s ease-in-out infinite;
+        }
+
+
+        @keyframes gradientMove {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .bg-animado {
+            background-size: 200% 200%;
+            animation: gradientMove 8s ease infinite;
+        }
+
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap');
 
         body {
@@ -56,11 +106,99 @@
         .anima-entrada {
             animation: entradaSuave 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
         }
+
+        .page-transition {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: #0f172a;
+            z-index: 999999;
+            animation: slideUp 1s cubic-bezier(0.85, 0, 0.15, 1) forwards;
+            animation-delay: 0.8s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes slideUp {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(-100%);
+                pointer-events: none;
+            }
+        }
+
+        .glitch-text {
+            color: white;
+            font-size: 3rem;
+            font-weight: 900;
+            letter-spacing: 0.1em;
+            animation: textFlicker 0.6s ease-in forwards;
+        }
+
+        @keyframes textFlicker {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+
+            50% {
+                opacity: 0.5;
+                transform: scale(1.1);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .btn-pulse {
+            box-shadow: 0 0 0 0 rgba(34, 211, 238, 0.7);
+            animation: pulseEffect 2s infinite;
+        }
+
+        @keyframes pulseEffect {
+            0% {
+                box-shadow: 0 0 0 0 rgba(34, 211, 238, 0.5);
+            }
+
+            70% {
+                box-shadow: 0 0 0 15px rgba(34, 211, 238, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(34, 211, 238, 0);
+            }
+        }
+
+        #workflow svg path,
+        section svg path {
+            animation: waveAnim 10s linear infinite alternate;
+        }
+
+        @keyframes waveAnim {
+            from {
+                d: path("M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z");
+            }
+
+            to {
+                d: path("M321.39,40.44c58,10.79,114.16,10.13,172,21.86,82.39,16.72,168.19,37.73,250.45,20.39C823.78,61,906.67,32,985.66,12.83c70.05-18.48,146.53-16.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,40.44Z");
+            }
+        }
     </style>
 </head>
 
 <body class="bg-slate-900 text-white min-h-screen overflow-x-hidden selection:bg-cyan-300 selection:text-blue-900">
-
+    <div id="progress-bar"></div>
+    <div class="page-transition">
+        <div class="glitch-text">CRUZPEDRO<span class="text-cyan-400">.DEV</span></div>
+    </div>
     <header
         class="fixed top-0 left-0 w-full z-50 bg-slate-900/40 backdrop-blur-xl border-b border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.1)] transition-all duration-300 anima-entrada"
         style="animation-delay: 0.5s; opacity: 0;">
@@ -90,12 +228,14 @@
     <main id="inicio" class="grid grid-cols-1 md:grid-cols-5 min-h-screen pt-20 anima-entrada">
 
         <section
-            class="md:col-span-3 bg-gradient-to-br from-blue-900 to-blue-950 p-10 md:p-20 flex flex-col justify-center relative overflow-hidden bg-bubbles">
-            <div class="absolute top-10 left-10 w-40 h-40 bg-cyan-500/10 rounded-full blur-3xl"></div>
-            <div class="absolute bottom-20 right-20 w-64 h-64 bg-blue-400/10 rounded-full blur-3xl"></div>
-            <div class="absolute top-1/2 left-1/4 w-16 h-16 border-4 border-cyan-200/20 rounded-full"></div>
+            class="md:col-span-3 bg-gradient-to-br from-blue-900 to-blue-950 p-10 md:p-20 flex flex-col justify-center relative overflow-hidden">
 
-            <div class="relative z-10">
+            <div id="particles-js" class="absolute inset-0 z-0"></div>
+
+            <div class="absolute top-10 left-10 w-40 h-40 bg-cyan-500/10 rounded-full blur-3xl z-0"></div>
+            <div class="absolute bottom-20 right-20 w-64 h-64 bg-blue-400/10 rounded-full blur-3xl z-0"></div>
+
+            <div class="relative z-10 pointer-events-none">
                 <h2
                     class="text-cyan-400 font-bold tracking-widest mb-4 uppercase text-sm md:text-base flex items-center gap-3">
                     <span class="w-8 h-1 bg-cyan-400 rounded-full shadow-[0_0_8px_#22d3ee]"></span>
@@ -115,12 +255,10 @@
                         class="font-black text-white tracking-wide drop-shadow-[0_0_12px_rgba(255,255,255,0.7)]">Pedro
                         Nunes Cruz</span>
                 </h3>
-
                 <p class="text-lg md:text-xl text-blue-100/80 max-w-lg leading-relaxed mb-10">
                     Fique à vontade para explorar este espaço. Aqui você vai encontrar meus projetos, estudos e um pouco
-                    mais sobre minha jornada no desenvolvimento.
+                    mais sobre minha jornada acadêmica e profissional!
                 </p>
-
             </div>
         </section>
 
@@ -145,11 +283,16 @@
             </div>
         </section>
     </main>
-
+    <div class="relative w-full overflow-hidden leading-[0] bg-slate-900">
+        <svg class="relative block w-full h-[60px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path
+                d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+                fill="#020617"></path>
+        </svg>
+    </div>
     <section id="sobre" class="relative py-24 px-6 md:px-12 overflow-hidden bg-slate-900">
         <div class="absolute top-10 left-0 w-96 h-96 bg-blue-500/5 rounded-full blur-[100px] pointer-events-none"></div>
-        <div class="absolute bottom-0 right-10 w-80 h-80 bg-cyan-500/10 rounded-full blur-[80px] pointer-events-none">
-        </div>
 
         <div class="relative z-10 max-w-5xl mx-auto">
             <div class="flex items-center gap-4 mb-10" data-aos="fade-right">
@@ -160,32 +303,40 @@
                 <div class="flex-1 h-px bg-gradient-to-r from-cyan-500/30 to-transparent"></div>
             </div>
 
-            <div data-aos="fade-up"
+            <div data-aos="zoom-out-up"
                 class="relative bg-white/5 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.4)] rounded-[2.5rem] p-8 md:p-12 overflow-hidden group hover:border-cyan-500/20 transition-colors duration-700">
-                <div
-                    class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-cyan-500/5 to-transparent pointer-events-none">
-                </div>
 
                 <div class="relative flex flex-col md:flex-row gap-10 md:gap-16 items-center">
                     <div class="flex-1 space-y-6">
                         <p class="text-blue-50/90 leading-relaxed text-base md:text-lg font-medium">
-                            Sou estudante do Bacharelado em <strong
+                            Sou estudante de <strong
                                 class="text-cyan-300 font-semibold drop-shadow-[0_0_8px_rgba(34,211,238,0.4)]">Sistemas
-                                de Informação na PUC Minas</strong> (3º período) e resido em Betim, MG. Sempre fui
-                            apaixonado por tecnologia e também muito curioso, e é essa curiosidade que me faz estudar e
-                            buscar evoluir diariamente no universo do desenvolvimento.
+                                de Informação na PUC Minas</strong> (3º período). Atualmente, foco minha evolução no
+                            desenvolvimento e na **Análise de Dados**, unindo raciocínio lógico à resolução de problemas
+                            reais.
                         </p>
                         <p class="text-blue-50/90 leading-relaxed text-base md:text-lg font-medium">
-                            Aos 19 anos, minha paixão não é somente pelos códigos. Sou fascinado por <strong
-                                class="text-cyan-300 font-semibold drop-shadow-[0_0_8px_rgba(34,211,238,0.4)]">hardware</strong>
-                            e entender como cada componente se comunica. Nas horas vagas, aproveito bons jogos
-                            eletrônicos e vejo séries.
+                            Minha trajetória combina a base técnica acadêmica com a experiência prática em
+                            infraestrutura de TI, o que me permite ter uma visão completa de como a tecnologia sustenta
+                            os resultados de um negócio.
                         </p>
+
+                        <div class="pt-4">
+                            <a href="Curriculo.pdf" download="Curriculo_PedroNunesCruz"
+                                class="inline-flex items-center gap-3 px-8 py-4 bg-cyan-500/10 border border-cyan-400/30 rounded-2xl text-cyan-300 font-bold tracking-widest uppercase text-sm hover:bg-cyan-500/20 hover:border-cyan-400 transition-all duration-300 transform hover:-translate-y-1 shadow-lg shadow-cyan-500/5">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                                </svg>
+                                Baixar Currículo (PDF)
+                            </a>
+                        </div>
                     </div>
 
-                    <div data-aos="zoom-in" data-aos-delay="200" class="w-full md:w-2/5 shrink-0">
+                    <div data-aos="flip-left" data-aos-delay="200" class="w-full md:w-2/5 shrink-0">
                         <div
-                            class="relative p-8 rounded-3xl bg-gradient-to-br from-cyan-900/40 to-blue-900/40 border border-cyan-400/20 shadow-2xl backdrop-blur-md transform transition-transform duration-500 hover:-translate-y-2">
+                            class="relative p-8 rounded-3xl bg-gradient-to-br from-cyan-900/40 to-blue-900/40 border border-cyan-400/20 shadow-2xl backdrop-blur-md">
                             <svg class="w-8 h-8 text-cyan-400/40 mb-4" fill="currentColor" viewBox="0 0 24 24">
                                 <path
                                     d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
@@ -254,6 +405,7 @@
             </div>
         </div>
     </section>
+
     <section id="projetos" class="relative py-20 px-6 md:px-12 bg-slate-900 overflow-hidden">
         <div
             class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-cyan-500/5 rounded-full blur-[120px] pointer-events-none">
@@ -328,7 +480,7 @@
                     </a>
                     <a href="https://github.com/cruzpedro-dev/cruzpedro-dev.github.io" target="_blank"
                         class="px-8 py-3 bg-white/5 border border-white/20 rounded-full text-white font-bold tracking-widest hover:bg-white/10 transition-all flex items-center gap-3 transform hover:-translate-y-1">
-                        Repositório
+                        Ver Código Fonte
                     </a>
                 </div>
             </div>
@@ -367,10 +519,98 @@
                     </a>
                 </div>
             </div>
+            <div data-aos="zoom-in"
+                class="relative w-full rounded-[2.5rem] bg-white/5 backdrop-blur-xl border border-white/10 shadow-[0_0_40px_rgba(250,204,21,0.1)] flex flex-col items-center justify-center text-center p-10 overflow-hidden group hover:border-yellow-500/30 transition-all duration-500 mt-10">
+
+                <div
+                    class="absolute inset-0 bg-gradient-to-tr from-white/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
+                </div>
+
+                <div class="mb-6 relative">
+                    <div
+                        class="absolute inset-0 bg-yellow-400 blur-xl opacity-20 group-hover:opacity-40 transition-opacity">
+                    </div>
+                    <svg class="w-16 h-16 text-yellow-400 relative z-10 drop-shadow-[0_0_15px_rgba(250,204,21,0.6)] group-hover:scale-110 transition-transform duration-500"
+                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
+                        </path>
+                    </svg>
+                </div>
+
+                <h3 class="text-2xl md:text-3xl font-bold text-white mb-4 drop-shadow-md">Monitoramento Ativo & BI</h3>
+
+                <p class="text-blue-200/80 text-lg max-w-2xl mx-auto mb-8">
+                    Laboratório focado em <span class="text-yellow-400 font-semibold">Business Intelligence</span>.
+                    Integração de métricas de infraestrutura extraídas de um servidor <span
+                        class="text-cyan-300 font-semibold">Linux</span> via <span
+                        class="text-cyan-300 font-semibold">Zabbix</span>, processadas em banco <span
+                        class="text-cyan-300 font-semibold">MySQL</span> e visualizadas através de dashboards
+                    estratégicos no <span class="text-yellow-400 font-semibold">Power BI</span>.
+                </p>
+
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="https://github.com/cruzpedro-dev/monitoramento-zabbix-powerbi.git" target="_blank"
+                        class="px-8 py-3 bg-gradient-to-r from-yellow-500/20 to-cyan-500/20 border border-yellow-400/50 rounded-full text-white font-bold tracking-widest hover:bg-yellow-500/40 hover:border-cyan-400 transition-all shadow-[0_0_15px_rgba(250,204,21,0.2)] flex items-center gap-3 transform hover:-translate-y-1">
+                        <i class="devicon-github-original text-2xl"></i>
+                        Ver Código Fonte
+                    </a>
+                </div>
+            </div>
 
         </div>
     </section>
+    <section id="github-stats" class="relative py-24 px-6 md:px-12 bg-slate-900 overflow-hidden">
+        <div
+            class="absolute top-0 right-0 w-[500px] h-[500px] bg-orange-500/5 rounded-full blur-[150px] pointer-events-none">
+        </div>
 
+        <div class="relative z-10 max-w-6xl mx-auto">
+            <div class="flex items-center gap-4 mb-16" data-aos="fade-right">
+                <h2 class="text-3xl md:text-4xl font-black text-white tracking-tight">
+                    Atividade <span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-400">GitHub.</span>
+                </h2>
+                <div class="flex-1 h-px bg-gradient-to-r from-orange-500/30 to-transparent"></div>
+            </div>
+
+            <div data-aos="fade-up"
+                class="relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2.5rem] p-8 md:p-12 shadow-2xl">
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
+
+                    <div class="flex flex-col items-center justify-center space-y-4">
+                        <h4 class="text-xs font-bold text-orange-300/50 uppercase tracking-widest">Ofensiva e
+                            Consistência</h4>
+                        <div class="w-full max-w-[480px] group transition-transform duration-500 hover:scale-[1.02]">
+                            <img src="https://github-readme-streak-stats.herokuapp.com/?user=cruzpedro-dev&theme=dark&hide_border=false&background=0f172a&ring=f97316&fire=f97316&currStreakNum=cbd5e1&currStreakLabel=f97316&sideNums=cbd5e1&sideLabels=cbd5e1&dates=94a3b8&borderColor=ea580c40&locale=pt_BR"
+                                alt="GitHub Streak"
+                                class="w-full h-auto object-contain rounded-2xl shadow-lg border border-orange-500/10">
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col items-center justify-center space-y-4">
+                        <h4 class="text-xs font-bold text-orange-300/50 uppercase tracking-widest">Tecnologias em Uso
+                        </h4>
+                        <div class="w-full max-w-[480px] group transition-transform duration-500 hover:scale-[1.02]">
+                            <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=cruzpedro-dev&layout=compact&bg_color=0f172a&text_color=cbd5e1&title_color=f97316&border_color=ea580c40&hide_border=false&locale=pt-br"
+                                alt="Linguagens Mais Usadas"
+                                class="w-full h-auto object-contain rounded-2xl shadow-lg border border-orange-500/10">
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="mt-12 flex justify-center">
+                    <a href="https://github.com/cruzpedro-dev" target="_blank"
+                        class="px-8 py-3 bg-orange-500/10 border border-orange-500/30 rounded-full text-orange-400 font-bold hover:bg-orange-500/20 transition-all flex items-center gap-3">
+                        <i class="devicon-github-original text-2xl"></i>
+                        Ver Perfil Completo
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
     <section id="habilidades" class="relative py-20 px-6 md:px-12 bg-slate-900 overflow-hidden">
         <div class="absolute bottom-0 left-20 w-72 h-72 bg-blue-600/10 rounded-full blur-[100px] pointer-events-none">
         </div>
@@ -396,33 +636,47 @@
 
                     <h3 class="text-2xl font-bold text-cyan-50 mb-8 flex items-center gap-3">
                         <svg class="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
                         </svg>
                         Stack Tecnológico
                     </h3>
 
                     <div class="mb-8">
-                        <h4 class="text-xs font-bold text-cyan-300/60 uppercase tracking-widest mb-4">Backend & Lógica</h4>
+                        <h4 class="text-xs font-bold text-cyan-300/60 uppercase tracking-widest mb-4">Backend & Lógica
+                        </h4>
                         <div class="flex flex-wrap gap-4">
-                            <div class="px-5 py-2.5 bg-white/5 border border-white/10 rounded-full flex items-center gap-3 shadow-lg backdrop-blur-md hover:scale-110 hover:bg-white/10 hover:border-cyan-400/50 transition-all duration-300">
-                                <i class="devicon-csharp-plain text-2xl text-purple-400 drop-shadow-[0_0_8px_rgba(192,132,252,0.6)]"></i>
+                            <div
+                                class="px-5 py-2.5 bg-white/5 border border-white/10 rounded-full flex items-center gap-3 shadow-lg backdrop-blur-md hover:scale-110 hover:bg-white/10 hover:border-cyan-400/50 transition-all duration-300">
+                                <i
+                                    class="devicon-csharp-plain text-2xl text-purple-400 drop-shadow-[0_0_8px_rgba(192,132,252,0.6)]"></i>
                                 <span class="font-bold text-white tracking-wide text-sm">C#</span>
                             </div>
-                            <div class="px-5 py-2.5 bg-white/5 border border-white/10 rounded-full flex items-center gap-3 shadow-lg backdrop-blur-md hover:scale-110 hover:bg-white/10 hover:border-cyan-400/50 transition-all duration-300">
-                                <i class="devicon-dotnetcore-plain text-2xl text-blue-500 drop-shadow-[0_0_8px_rgba(59,130,246,0.6)]"></i>
+                            <div
+                                class="px-5 py-2.5 bg-white/5 border border-white/10 rounded-full flex items-center gap-3 shadow-lg backdrop-blur-md hover:scale-110 hover:bg-white/10 hover:border-cyan-400/50 transition-all duration-300">
+                                <i
+                                    class="devicon-dotnetcore-plain text-2xl text-blue-500 drop-shadow-[0_0_8px_rgba(59,130,246,0.6)]"></i>
                                 <span class="font-bold text-white tracking-wide text-sm">.NET 8</span>
                             </div>
-                            <div class="px-5 py-2.5 bg-white/5 border border-white/10 rounded-full flex items-center gap-3 shadow-lg backdrop-blur-md hover:scale-110 hover:bg-white/10 hover:border-cyan-400/50 transition-all duration-300">
-                                <i class="devicon-python-plain text-2xl text-blue-400 drop-shadow-[0_0_8px_rgba(59,130,246,0.6)]"></i>
+                            <div
+                                class="px-5 py-2.5 bg-white/5 border border-white/10 rounded-full flex items-center gap-3 shadow-lg backdrop-blur-md hover:scale-110 hover:bg-white/10 hover:border-cyan-400/50 transition-all duration-300">
+                                <i
+                                    class="devicon-python-plain text-2xl text-blue-400 drop-shadow-[0_0_8px_rgba(59,130,246,0.6)]"></i>
                                 <span class="font-bold text-white tracking-wide text-sm">Python</span>
                             </div>
-                            <div class="px-5 py-2.5 bg-white/5 border border-white/10 rounded-full flex items-center gap-3 shadow-lg backdrop-blur-md hover:scale-110 hover:bg-white/10 hover:border-cyan-400/50 transition-all duration-300">
-                                <i class="devicon-nodejs-plain text-2xl text-green-400 drop-shadow-[0_0_8px_rgba(74,222,128,0.6)]"></i>
+                            <div
+                                class="px-5 py-2.5 bg-white/5 border border-white/10 rounded-full flex items-center gap-3 shadow-lg backdrop-blur-md hover:scale-110 hover:bg-white/10 hover:border-cyan-400/50 transition-all duration-300">
+                                <i
+                                    class="devicon-nodejs-plain text-2xl text-green-400 drop-shadow-[0_0_8px_rgba(74,222,128,0.6)]"></i>
                                 <span class="font-bold text-white tracking-wide text-sm">Node.js</span>
                             </div>
-                            <div class="px-5 py-2.5 bg-white/5 border border-white/10 rounded-full flex items-center gap-3 shadow-lg backdrop-blur-md hover:scale-110 hover:bg-white/10 hover:border-cyan-400/50 transition-all duration-300">
-                                <svg class="w-6 h-6 text-cyan-200 drop-shadow-[0_0_8px_rgba(165,243,252,0.6)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            <div
+                                class="px-5 py-2.5 bg-white/5 border border-white/10 rounded-full flex items-center gap-3 shadow-lg backdrop-blur-md hover:scale-110 hover:bg-white/10 hover:border-cyan-400/50 transition-all duration-300">
+                                <svg class="w-6 h-6 text-cyan-200 drop-shadow-[0_0_8px_rgba(165,243,252,0.6)]"
+                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                    </path>
                                 </svg>
                                 <span class="font-bold text-white tracking-wide text-sm">Lógica & Dados</span>
                             </div>
@@ -432,16 +686,23 @@
                     <div class="mb-8">
                         <h4 class="text-xs font-bold text-cyan-300/60 uppercase tracking-widest mb-4">Dados & B.I.</h4>
                         <div class="flex flex-wrap gap-4">
-                            <div class="px-5 py-2.5 bg-white/5 border border-white/10 rounded-full flex items-center gap-3 shadow-lg backdrop-blur-md hover:scale-110 hover:bg-white/10 hover:border-cyan-400/50 transition-all duration-300">
-                                <i class="devicon-microsoftsqlserver-plain text-2xl text-red-400 drop-shadow-[0_0_8px_rgba(248,113,113,0.6)]"></i>
+                            <div
+                                class="px-5 py-2.5 bg-white/5 border border-white/10 rounded-full flex items-center gap-3 shadow-lg backdrop-blur-md hover:scale-110 hover:bg-white/10 hover:border-cyan-400/50 transition-all duration-300">
+                                <i
+                                    class="devicon-microsoftsqlserver-plain text-2xl text-red-400 drop-shadow-[0_0_8px_rgba(248,113,113,0.6)]"></i>
                                 <span class="font-bold text-white tracking-wide text-sm">SQL Server</span>
                             </div>
-                            <div class="px-5 py-2.5 bg-white/5 border border-white/10 rounded-full flex items-center gap-3 shadow-lg backdrop-blur-md hover:scale-110 hover:bg-white/10 hover:border-cyan-400/50 transition-all duration-300">
-                                <i class="devicon-sqlite-plain text-2xl text-sky-400 drop-shadow-[0_0_8px_rgba(56,189,248,0.6)]"></i>
+                            <div
+                                class="px-5 py-2.5 bg-white/5 border border-white/10 rounded-full flex items-center gap-3 shadow-lg backdrop-blur-md hover:scale-110 hover:bg-white/10 hover:border-cyan-400/50 transition-all duration-300">
+                                <i
+                                    class="devicon-sqlite-plain text-2xl text-sky-400 drop-shadow-[0_0_8px_rgba(56,189,248,0.6)]"></i>
                                 <span class="font-bold text-white tracking-wide text-sm">SQLite</span>
                             </div>
-                            <div class="px-5 py-2.5 bg-white/5 border border-white/10 rounded-full flex items-center gap-3 shadow-lg backdrop-blur-md hover:scale-110 hover:bg-white/10 hover:border-cyan-400/50 transition-all duration-300">
-                                <svg class="w-6 h-6 text-green-500 drop-shadow-[0_0_8px_rgba(34,197,94,0.6)]" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                            <div
+                                class="px-5 py-2.5 bg-white/5 border border-white/10 rounded-full flex items-center gap-3 shadow-lg backdrop-blur-md hover:scale-110 hover:bg-white/10 hover:border-cyan-400/50 transition-all duration-300">
+                                <svg class="w-6 h-6 text-green-500 drop-shadow-[0_0_8px_rgba(34,197,94,0.6)]"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" viewBox="0 0 24 24">
                                     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                                     <polyline points="14 2 14 8 20 8"></polyline>
                                     <path d="M8 13h5"></path>
@@ -450,8 +711,11 @@
                                 </svg>
                                 <span class="font-bold text-white tracking-wide text-sm">Excel</span>
                             </div>
-                            <div class="px-5 py-2.5 bg-white/5 border border-white/10 rounded-full flex items-center gap-3 shadow-lg backdrop-blur-md hover:scale-110 hover:bg-white/10 hover:border-cyan-400/50 transition-all duration-300">
-                                <svg class="w-6 h-6 text-yellow-400 drop-shadow-[0_0_8px_rgba(250,204,21,0.6)]" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                            <div
+                                class="px-5 py-2.5 bg-white/5 border border-white/10 rounded-full flex items-center gap-3 shadow-lg backdrop-blur-md hover:scale-110 hover:bg-white/10 hover:border-cyan-400/50 transition-all duration-300">
+                                <svg class="w-6 h-6 text-yellow-400 drop-shadow-[0_0_8px_rgba(250,204,21,0.6)]"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" viewBox="0 0 24 24">
                                     <path d="M18 20V10"></path>
                                     <path d="M12 20V4"></path>
                                     <path d="M6 20v-4"></path>
@@ -462,26 +726,37 @@
                     </div>
 
                     <div>
-                        <h4 class="text-xs font-bold text-cyan-300/60 uppercase tracking-widest mb-4">Frontend & Infraestrutura</h4>
+                        <h4 class="text-xs font-bold text-cyan-300/60 uppercase tracking-widest mb-4">Frontend &
+                            Infraestrutura</h4>
                         <div class="flex flex-wrap gap-4">
-                            <div class="px-5 py-2.5 bg-white/5 border border-white/10 rounded-full flex items-center gap-3 shadow-lg backdrop-blur-md hover:scale-110 hover:bg-white/10 hover:border-cyan-400/50 transition-all duration-300">
-                                <i class="devicon-react-original text-2xl text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.6)] animate-[spin_10s_linear_infinite]"></i>
+                            <div
+                                class="px-5 py-2.5 bg-white/5 border border-white/10 rounded-full flex items-center gap-3 shadow-lg backdrop-blur-md hover:scale-110 hover:bg-white/10 hover:border-cyan-400/50 transition-all duration-300">
+                                <i
+                                    class="devicon-react-original text-2xl text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.6)] animate-[spin_10s_linear_infinite]"></i>
                                 <span class="font-bold text-white tracking-wide text-sm">React</span>
                             </div>
-                            <div class="px-5 py-2.5 bg-white/5 border border-white/10 rounded-full flex items-center gap-3 shadow-lg backdrop-blur-md hover:scale-110 hover:bg-white/10 hover:border-cyan-400/50 transition-all duration-300">
-                                <i class="devicon-javascript-plain text-2xl text-yellow-400 drop-shadow-[0_0_8px_rgba(250,204,21,0.6)]"></i>
+                            <div
+                                class="px-5 py-2.5 bg-white/5 border border-white/10 rounded-full flex items-center gap-3 shadow-lg backdrop-blur-md hover:scale-110 hover:bg-white/10 hover:border-cyan-400/50 transition-all duration-300">
+                                <i
+                                    class="devicon-javascript-plain text-2xl text-yellow-400 drop-shadow-[0_0_8px_rgba(250,204,21,0.6)]"></i>
                                 <span class="font-bold text-white tracking-wide text-sm">JavaScript</span>
                             </div>
-                            <div class="px-5 py-2.5 bg-white/5 border border-white/10 rounded-full flex items-center gap-3 shadow-lg backdrop-blur-md hover:scale-110 hover:bg-white/10 hover:border-cyan-400/50 transition-all duration-300">
-                                <i class="devicon-html5-plain text-2xl text-orange-500 drop-shadow-[0_0_8px_rgba(249,115,22,0.6)]"></i>
+                            <div
+                                class="px-5 py-2.5 bg-white/5 border border-white/10 rounded-full flex items-center gap-3 shadow-lg backdrop-blur-md hover:scale-110 hover:bg-white/10 hover:border-cyan-400/50 transition-all duration-300">
+                                <i
+                                    class="devicon-html5-plain text-2xl text-orange-500 drop-shadow-[0_0_8px_rgba(249,115,22,0.6)]"></i>
                                 <span class="font-bold text-white tracking-wide text-sm">HTML / CSS</span>
                             </div>
-                            <div class="px-5 py-2.5 bg-white/5 border border-white/10 rounded-full flex items-center gap-3 shadow-lg backdrop-blur-md hover:scale-110 hover:bg-white/10 hover:border-cyan-400/50 transition-all duration-300">
-                                <i class="devicon-github-original text-2xl text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.6)]"></i>
+                            <div
+                                class="px-5 py-2.5 bg-white/5 border border-white/10 rounded-full flex items-center gap-3 shadow-lg backdrop-blur-md hover:scale-110 hover:bg-white/10 hover:border-cyan-400/50 transition-all duration-300">
+                                <i
+                                    class="devicon-github-original text-2xl text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.6)]"></i>
                                 <span class="font-bold text-white tracking-wide text-sm">Git & GitHub</span>
                             </div>
-                            <div class="px-5 py-2.5 bg-white/5 border border-white/10 rounded-full flex items-center gap-3 shadow-lg backdrop-blur-md hover:scale-110 hover:bg-white/10 hover:border-cyan-400/50 transition-all duration-300">
-                                <i class="devicon-windows8-original text-2xl text-blue-500 drop-shadow-[0_0_8px_rgba(59,130,246,0.6)]"></i>
+                            <div
+                                class="px-5 py-2.5 bg-white/5 border border-white/10 rounded-full flex items-center gap-3 shadow-lg backdrop-blur-md hover:scale-110 hover:bg-white/10 hover:border-cyan-400/50 transition-all duration-300">
+                                <i
+                                    class="devicon-windows8-original text-2xl text-blue-500 drop-shadow-[0_0_8px_rgba(59,130,246,0.6)]"></i>
                                 <span class="font-bold text-white tracking-wide text-sm">Windows Server & AD</span>
                             </div>
                         </div>
@@ -491,7 +766,7 @@
                 <div
                     class="relative flex flex-col w-full h-full rounded-[2rem] bg-[#151b2b]/80 border border-slate-700/50 p-8 overflow-hidden backdrop-blur-sm shadow-xl">
 
-                    <h3 class="text-xl font-bold text-white text-center mb-6">qMinhas Certificações</h3>
+                    <h3 class="text-xl font-bold text-white text-center mb-6">Minhas Certificações</h3>
 
                     <div class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-6"
                         style="scrollbar-width: none; -ms-overflow-style: none;">
@@ -622,9 +897,87 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({
-            duration: 1000,
-            once: true,
-            offset: 100
+            duration: 1200,
+            once: false,
+            mirror: true,
+            offset: 120,
+            easing: 'ease-out-back'
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+    <script>
+
+        VanillaTilt.init(document.querySelectorAll(".card-3d"), {
+            max: 10,
+            speed: 400,
+            glare: true,
+            "max-glare": 0.2
+        });
+    </script>
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script>
+        window.onscroll = function () {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById("progress-bar").style.width = scrolled + "%";
+        };
+        particlesJS("particles-js", {
+            "particles": {
+                "number": {
+                    "value": 60,
+                    "density": { "enable": true, "value_area": 800 }
+                },
+                "color": { "value": "#22d3ee" }, /* Cor ciano */
+                "shape": { "type": "circle" },
+                "opacity": {
+                    "value": 0.5,
+                    "random": false
+                },
+                "size": {
+                    "value": 3,
+                    "random": true
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#3b82f6", /* Azul médio nas linhas */
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 2,
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "grab" /* Conecta linhas ao mouse */
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push" /* Adiciona mais pontos ao clicar */
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 180,
+                        "line_linked": { "opacity": 1 }
+                    },
+                    "push": { "particles_nb": 3 }
+                }
+            },
+            "retina_detect": true
         });
     </script>
 </body>
