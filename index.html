@@ -1413,7 +1413,7 @@
 
 
 
-                    <div class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-6"
+                    <div id="carrossel-certificados" class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-6"
                         style="scrollbar-width: none; -ms-overflow-style: none;">
 
                         <style>
@@ -1450,19 +1450,49 @@
                             </a>
 
                         </div>
+                        <div
+                            class="snap-center shrink-0 w-full flex flex-col items-center justify-center text-center mt-2">
+                            <div
+                                class="w-16 h-16 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center mb-4 shadow-[0_0_15px_rgba(16,185,129,0.2)]">
+                                <svg class="w-8 h-8 text-emerald-400" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4">
+                                    </path>
+                                </svg>
+                            </div>
 
+                            <h4 class="text-white font-bold text-lg mb-1 leading-tight">Fundamentos de Engenharia<br>de
+                                Dados e Machine Learning</h4>
+
+                            <p class="text-slate-400 text-sm mb-5">TOTVS & DIO • 61h</p>
+
+                            <a href="totvsdio.pdf" target="_blank"
+                                class="px-6 py-2 bg-gradient-to-r from-emerald-500/20 to-teal-500/20 border border-emerald-500/30 rounded-full text-emerald-300 text-sm font-semibold hover:bg-emerald-500/30 hover:shadow-[0_0_15px_rgba(16,185,129,0.2)] transition-all">
+                                Ver Certificado
+                            </a>
+                        </div>
 
 
                     </div>
 
 
 
-                    <div class="absolute bottom-4 left-0 right-0 text-center pointer-events-none">
-
-                        <span class="text-slate-500/50 text-xs tracking-widest uppercase">← Arraste para ver mais
-
-                            →</span>
-
+                    <div class="flex items-center justify-center gap-6 mt-4">
+                        <button onclick="moverCertificado(-1)"
+                            class="w-10 h-10 flex items-center justify-center bg-white/5 border border-white/10 hover:border-cyan-400 hover:bg-cyan-500/20 text-white rounded-full transition-all cursor-pointer">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 19l-7-7 7-7"></path>
+                            </svg>
+                        </button>
+                        <button onclick="moverCertificado(1)"
+                            class="w-10 h-10 flex items-center justify-center bg-white/5 border border-white/10 hover:border-cyan-400 hover:bg-cyan-500/20 text-white rounded-full transition-all cursor-pointer">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                                </path>
+                            </svg>
+                        </button>
                     </div>
 
 
@@ -1817,7 +1847,14 @@
             trilho.scrollBy({ left: direcao * tamanhoPulo, behavior: 'smooth' });
         }
     </script>
-
+    <script>
+        function moverCertificado(direcao) {
+            const carrossel = document.getElementById('carrossel-certificados');
+            // Pega a largura exata de um certificado para rolar exatamente 1 por vez
+            const larguraCard = carrossel.clientWidth;
+            carrossel.scrollBy({ left: direcao * larguraCard, behavior: 'smooth' });
+        }
+    </script>
 
 </body>
 
