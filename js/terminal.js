@@ -74,15 +74,19 @@ export function acender(k, chave) {
 }
 export const retanguloDaLinha = (k, chave) => TERMS[k].linhas[indiceDaChave(k, chave)].getBoundingClientRect();
 
-// digita um comando extra nas 2 linhas reservadas do fim do terminal (SET lang..., SELECT ... WHERE id...)
-export function digitarExtra(k, cmd, saida, aoFim, prompt) {
-  const T = TERMS[k], d = T.linhas[T.n], d2 = T.linhas[T.n + 1];
+// digita um comando extra nas linhas reservadas do fim do terminal (SET lang..., SELECT ... WHERE id...).
+// cmd pode ser uma lista: cada parte vai numa linha (a 2ª em diante com o prompt de continuação "portfolio-#").
+export function digitarExtra(k, cmd, saida, aoFim, prompt, promptCont = prompt) {
+  const T = TERMS[k], partes = Array.isArray(cmd) ? cmd : [cmd];
   if (T.extraTl) T.extraTl.kill();
-  d2.innerHTML = '';
-  const c = comp(cmd), o = { n: 0 };
+  T.linhas.slice(T.n).forEach((l) => { l.innerHTML = ''; });
   const tl = gsap.timeline({ onComplete: aoFim });
-  tl.to(o, { n: c, duration: c * 0.014, ease: 'none', onUpdate() { d.innerHTML = prompt + fatiar(cmd, Math.round(o.n)) + CARET; } });
-  tl.call(() => { d.innerHTML = prompt + cmd; d2.innerHTML = saida; });
+  partes.forEach((p, i) => {
+    const d = T.linhas[T.n + i], pr = i ? promptCont : prompt, c = comp(p), o = { n: 0 };
+    tl.to(o, { n: c, duration: c * 0.014, ease: 'none', onUpdate() { d.innerHTML = pr + fatiar(p, Math.round(o.n)) + CARET; } });
+    tl.call(() => { d.innerHTML = pr + p; });
+  });
+  tl.call(() => { T.linhas[T.n + partes.length].innerHTML = saida; });
   T.extraTl = tl;
   return tl;
 }

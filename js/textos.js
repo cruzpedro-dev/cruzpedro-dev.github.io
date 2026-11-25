@@ -16,6 +16,21 @@ export const sqlK = (t) => `<span class="k">${t}</span>`;   // palavra-chave SQL
 export const sqlS = (t) => `<span class="s">${t}</span>`;   // texto entre aspas
 export const sqlOk = (t) => `<span class="ok">${t}</span>`;
 export const PROMPT_SQL = P_SQL;
+export const PROMPT_CONT = P_CONT;
+
+
+// áreas dos projetos: a contagem de cada uma é feita sozinha a partir do HTML (contarProjetos),
+// então para incluir um projeto novo basta colocar o cartão no index.html com data-area="...".
+const AREAS = [
+  { id: 'dados', pt: 'dados', en: 'data', luz: COR.verde },
+  { id: 'backend', pt: 'back-end', en: 'back-end', luz: COR.amarelo },
+  { id: 'web', pt: 'web', en: 'web', luz: COR.coral },
+  { id: 'ia', pt: 'ia', en: 'ai', luz: COR.azul },
+  { id: 'infra', pt: 'infra', en: 'infra', luz: COR.azulClaro }
+];
+const txtArea = (nome, n) => ` ${nome.padEnd(9)} | ${String(n).padStart(4)}`;
+const linhasArea = (l) => AREAS.map((a) => ({ tipo: 'out', txt: txtArea(a[l], 0), chave: 'a-' + a.id, luz: a.luz, area: a }));
+export const nomeArea = (id, l) => (AREAS.find((a) => a.id === id) || { [l]: id })[l];
 
 // linhas: tipo 'cmd' (digitada letra a letra, com prompt), 'out' (resultado) ou 'com' (comentário).
 // 'chave' liga a linha ao conteúdo (data-linha no HTML); 'luz' é a cor que a linha ganha quando o bloco pula.
@@ -68,16 +83,12 @@ export const TERMINAL = {
     ],
     [
       { tipo: 'com', txt: '-- 04 · projetos' },
-      { tipo: 'cmd', pre: P_SQL, txt: `${sqlK('SELECT')} * ${sqlK('FROM')} projetos;` },
-      { tipo: 'out', txt: ' id | nome                    | stack' },
-      { tipo: 'out', txt: '----+-------------------------+--------' },
-      { tipo: 'out', txt: '  1 | Calculadora TDP e Setup | C#', chave: 'p1', luz: COR.amarelo },
-      { tipo: 'out', txt: '  2 | Gestão Financeira       | JS', chave: 'p2', luz: COR.coral },
-      { tipo: 'out', txt: '  3 | Sistema de Gestão (CLI) | Python', chave: 'p3', luz: COR.verde },
-      { tipo: 'out', txt: '  4 | Monitoramento & BI      | Zabbix', chave: 'p4', luz: COR.azulClaro },
-      { tipo: 'out', txt: '  5 | Pipeline ETL com IA     | Python', chave: 'p5', luz: COR.creme },
-      { tipo: 'out', txt: '  6 | Skill + agente de IA    | IA', chave: 'p6', luz: COR.azul },
-      { tipo: 'out', txt: sqlOk('(6 linhas)') }
+      { tipo: 'cmd', pre: P_SQL, txt: `${sqlK('SELECT')} area, ${sqlK('COUNT')}(*) ${sqlK('FROM')} projetos` },
+      { tipo: 'cmd', pre: P_CONT, txt: `  ${sqlK('GROUP BY')} area;` },
+      { tipo: 'out', txt: ' area      | count' },
+      { tipo: 'out', txt: '-----------+------' },
+      ...linhasArea('pt'),
+      { tipo: 'out', txt: sqlOk('(5 linhas)') }
     ],
     [
       { tipo: 'com', txt: '-- 05 · skills & tecnologias' },
@@ -106,11 +117,9 @@ export const TERMINAL = {
     ],
     [
       { tipo: 'com', txt: '-- 07 · contato' },
-      { tipo: 'cmd', pre: P_SQL, txt: `${sqlK('INSERT INTO')} contato ${sqlK('VALUES')}` },
-      { tipo: 'cmd', pre: P_CONT, txt: `  (${sqlS("'você'")}, ${sqlS("'oi, Pedro!'")});` },
-      { tipo: 'out', txt: sqlOk('INSERT 0 1') },
-      { tipo: 'cmd', pre: P_SQL, txt: `${sqlK('COMMIT')};` },
-      { tipo: 'out', txt: sqlOk('COMMIT ✓'), chave: 'commit', luz: COR.amarelo }
+      { tipo: 'cmd', pre: P_SQL, txt: `${sqlK('SELECT')} * ${sqlK('FROM')} contatos;`, chave: 'sel', luz: COR.amarelo },
+      { tipo: 'out', txt: ' canal     | endereco' },
+      { tipo: 'out', txt: '-----------+--------------------------' }
     ]
   ],
   en: [
@@ -161,16 +170,12 @@ export const TERMINAL = {
     ],
     [
       { tipo: 'com', txt: '-- 04 · projects' },
-      { tipo: 'cmd', pre: P_SQL, txt: `${sqlK('SELECT')} * ${sqlK('FROM')} projects;` },
-      { tipo: 'out', txt: ' id | name                    | stack' },
-      { tipo: 'out', txt: '----+-------------------------+--------' },
-      { tipo: 'out', txt: '  1 | TDP & Setup Calculator  | C#', chave: 'p1', luz: COR.amarelo },
-      { tipo: 'out', txt: '  2 | Personal Finance        | JS', chave: 'p2', luz: COR.coral },
-      { tipo: 'out', txt: '  3 | Management System (CLI) | Python', chave: 'p3', luz: COR.verde },
-      { tipo: 'out', txt: '  4 | Monitoring & BI         | Zabbix', chave: 'p4', luz: COR.azulClaro },
-      { tipo: 'out', txt: '  5 | ETL Pipeline with AI    | Python', chave: 'p5', luz: COR.creme },
-      { tipo: 'out', txt: '  6 | AI skill + agent        | AI', chave: 'p6', luz: COR.azul },
-      { tipo: 'out', txt: sqlOk('(6 rows)') }
+      { tipo: 'cmd', pre: P_SQL, txt: `${sqlK('SELECT')} area, ${sqlK('COUNT')}(*) ${sqlK('FROM')} projects` },
+      { tipo: 'cmd', pre: P_CONT, txt: `  ${sqlK('GROUP BY')} area;` },
+      { tipo: 'out', txt: ' area      | count' },
+      { tipo: 'out', txt: '-----------+------' },
+      ...linhasArea('en'),
+      { tipo: 'out', txt: sqlOk('(5 rows)') }
     ],
     [
       { tipo: 'com', txt: '-- 05 · skills & technologies' },
@@ -199,16 +204,21 @@ export const TERMINAL = {
     ],
     [
       { tipo: 'com', txt: '-- 07 · contact' },
-      { tipo: 'cmd', pre: P_SQL, txt: `${sqlK('INSERT INTO')} contact ${sqlK('VALUES')}` },
-      { tipo: 'cmd', pre: P_CONT, txt: `  (${sqlS("'you'")}, ${sqlS("'hi, Pedro!'")});` },
-      { tipo: 'out', txt: sqlOk('INSERT 0 1') },
-      { tipo: 'cmd', pre: P_SQL, txt: `${sqlK('COMMIT')};` },
-      { tipo: 'out', txt: sqlOk('COMMIT ✓'), chave: 'commit', luz: COR.amarelo }
+      { tipo: 'cmd', pre: P_SQL, txt: `${sqlK('SELECT')} * ${sqlK('FROM')} contacts;`, chave: 'sel', luz: COR.amarelo },
+      { tipo: 'out', txt: ' channel   | address' },
+      { tipo: 'out', txt: '-----------+--------------------------' }
     ]
   ]
 };
 
 // textos da interface que o JavaScript escreve (o resto está no HTML, com data-t)
+// conta quantos projetos há em cada área (lê os cartões do index.html) e escreve no terminal
+export function contarProjetos(cartoes) {
+  const n = {};
+  cartoes.forEach((c) => (c.dataset.area || '').split(' ').forEach((a) => { n[a] = (n[a] || 0) + 1; }));
+  ['pt', 'en'].forEach((l) => TERMINAL[l][4].forEach((linha) => { if (linha.area) linha.txt = txtArea(linha.area[l], n[linha.area.id] || 0); }));
+}
+
 export const UI = {
   pt: { titulo: 'Pedro Nunes Cruz · Portfólio', desc: 'Portfólio de Pedro Nunes Cruz, estudante de Sistemas de Informação na PUC Minas e desenvolvedor full stack.' },
   en: { titulo: 'Pedro Nunes Cruz · Portfolio', desc: 'Portfolio of Pedro Nunes Cruz, Information Systems student at PUC Minas and full stack developer.' }
@@ -250,6 +260,7 @@ export const EN = {
   p5d: 'Data Engineering project built with <b>Python</b> and <b>Pandas</b>. Focused on resilience: extracting data from local CSV files, integrating with the OpenAI API for intelligent marketing transformation and structuring the Load into JSON.',
   p6t: 'AI skill and agent for 3D websites', tagia: 'AI agents',
   p6d: 'Created a <b>skill</b> and an <b>AI agent</b> that teach and carry out the construction of immersive 3D websites, with a manual, code recipes, a starter kit and a testing routine. The agent itself built the first version of this portfolio.',
+  afiltro: 'Filter projects by area', ftodos: 'All', fdados: 'Data', fia: 'AI', l5: '(5 rows)',
   ss1: 'Teamwork', ss2: 'Commitment', ss3: 'Responsibility', ss4: 'Fast learner', ss5: 'Adaptability', ss6: 'Problem solving', ss7: 'Eagerness to learn',
   mtec: 'Technologies', mlinks: 'Links',
   e5: '05 · skills & technologies', t5: 'Skills & technologies.',

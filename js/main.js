@@ -1,10 +1,10 @@
 import { ESTADO } from './estado.js';
 import { criarTerminais, TERMS, digitarExtra } from './terminal.js';
 import { aplicarIdioma, idiomaSalvo, linguaAtual } from './idioma.js';
-import { montar, iniciarModal, secaoDe } from './secoes.js';
+import { montar, iniciarModal, iniciarFiltro, secaoDe } from './secoes.js';
 import { criarGrafico } from './grafico3d.js';
 import { iniciarPreloader } from './efeitos.js';
-import { sqlK, sqlS, sqlOk, PROMPT_SQL } from './textos.js';
+import { sqlK, sqlS, sqlOk, PROMPT_SQL, contarProjetos } from './textos.js';
 
 /* =====================================================================
    LIGA TUDO: terminais, idioma, rolagem suave (Lenis), gatilhos das seções,
@@ -14,6 +14,7 @@ import { sqlK, sqlS, sqlOk, PROMPT_SQL } from './textos.js';
 if (window.gsap && window.ScrollTrigger) {
   gsap.registerPlugin(ScrollTrigger);
   document.body.classList.add('animado');
+  contarProjetos(document.querySelectorAll('.projeto'));
   criarTerminais();
   aplicarIdioma(idiomaSalvo());
   const grafico = criarGrafico(document.getElementById('gl'));
@@ -27,6 +28,7 @@ if (window.gsap && window.ScrollTrigger) {
     gsap.ticker.lagSmoothing(0);
   }
   const modal = iniciarModal(lenis);
+  iniciarFiltro();
 
   // ir para uma seção (menu, barra do topo, logo)
   const botaoMenu = document.getElementById('btn-menu'), menuCel = document.getElementById('menu-celular');
@@ -117,7 +119,7 @@ if (window.gsap && window.ScrollTrigger) {
     const visivel = (el) => { const c = getComputedStyle(el); return c.visibility !== 'hidden' && c.display !== 'none' && +c.opacity > 0.01; };
     const nome = (el) => (el.id ? '#' + el.id : el.className.toString().split(' ')[0]) + ':' + (el.textContent || '').trim().slice(0, 18);
     document.querySelectorAll('.cena').forEach((sec) => {
-      const els = [...sec.querySelectorAll('.cartao,.term,.titulo,.etiqueta,.subtitulo,.mega,.botao,.rede,.bloco,#regiao-grafico,.obrigado,.rodape,.tempo-linha')].filter(visivel);
+      const els = [...sec.querySelectorAll('.cartao,.term,.titulo,.etiqueta,.subtitulo,.mega,.botao,.rede,.bloco,#regiao-grafico,.obrigado,.rodape,.tempo-linha,.filtro')].filter(visivel);
       for (let i = 0; i < els.length; i++) for (let j = i + 1; j < els.length; j++) {
         const a = els[i], b = els[j];
         if (a.contains(b) || b.contains(a)) continue;

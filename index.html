@@ -154,17 +154,45 @@
     <div class="grade">
       <div class="cena-conteudo projetos">
         <header class="cena-titulo ent"><span class="etiqueta" data-t="e4">04 · meus projetos</span><h2 class="titulo" data-t="t4">Meus projetos.</h2></header>
-        <div class="faixa-projetos">
-          <article class="cartao projeto voa" data-linha="p1" data-id="1" style="--cor:var(--amarelo)">
-            <div class="proj-topo"><b>01</b><ul class="tags"><li>C#</li><li>POO</li><li>terminal</li></ul></div>
-            <h3 data-t="p1t">Calculadora de TDP e Setup</h3>
-            <p class="proj-desc" data-t="p1d">Sistema de terminal desenvolvido em <b>C#</b> aplicando conceitos de Programação Orientada a Objetos (POO), Listas e Loops. O programa atua como um simulador de calculadora, somando valores de componentes e dimensionando a fonte de alimentação necessária em Watts.</p>
-            <div class="acoes"><a class="botao" href="https://github.com/cruzpedro-dev/CalcSetup.git" target="_blank" rel="noopener"><span data-t="codigo">Ver código fonte</span> <i aria-hidden="true">↗</i></a></div>
+        <div class="filtros ent" role="group" aria-label="Filtrar projetos por área" data-aria="afiltro">
+          <button class="filtro" type="button" data-f="todos" aria-pressed="true" data-t="ftodos">Todos</button>
+          <button class="filtro" type="button" data-f="dados" aria-pressed="false" style="--cor:var(--verde)"><i></i><span data-t="fdados">Dados</span></button>
+          <button class="filtro" type="button" data-f="backend" aria-pressed="false" style="--cor:var(--amarelo)"><i></i>Back-end</button>
+          <button class="filtro" type="button" data-f="web" aria-pressed="false" style="--cor:var(--coral)"><i></i>Web</button>
+          <button class="filtro" type="button" data-f="ia" aria-pressed="false" style="--cor:var(--azul)"><i></i><span data-t="fia">IA</span></button>
+          <button class="filtro" type="button" data-f="infra" aria-pressed="false" style="--cor:var(--azul-claro)"><i></i>Infra</button>
+        </div>
+        <div class="lista-projetos">
+          <article class="cartao projeto voa" data-linha="a-ia" data-area="ia web" data-id="6" style="--cor:var(--azul);--cor-txt:var(--creme)">
+            <b class="proj-num">06</b>
+            <div class="proj-info"><h3 data-t="p6t">Skill e agente de IA para sites 3D</h3><ul class="tags"><li data-t="tagia">Agentes de IA</li><li>Three.js</li><li>GSAP</li></ul></div>
+            <p class="proj-desc" data-t="p6d">Criação de uma <b>skill</b> e de um <b>agente de IA</b> que ensinam e executam a construção de sites imersivos em 3D, com manual, receitas de código, kit inicial e rotina de testes. O próprio agente construiu a primeira versão deste portfólio.</p>
             <button class="botao mais" type="button"><span data-t="detalhes">Ver detalhes</span> <i aria-hidden="true">+</i></button>
           </article>
-          <article class="cartao projeto voa" data-linha="p2" data-id="2" style="--cor:var(--coral);--cor-txt:var(--creme)">
-            <div class="proj-topo"><b>02</b><ul class="tags"><li>JavaScript</li><li>CSS</li><li>LocalStorage</li></ul></div>
-            <h3 data-t="p2t">Gestão Financeira Pessoal</h3>
+          <article class="cartao projeto voa" data-linha="a-dados" data-area="dados ia" data-id="5" style="--cor:var(--creme)">
+            <b class="proj-num">05</b>
+            <div class="proj-info"><h3 data-t="p5t">Pipeline ETL com IA</h3><ul class="tags"><li>Python</li><li>Pandas</li><li>API OpenAI</li><li>JSON</li></ul></div>
+            <p class="proj-desc" data-t="p5d">Projeto de Engenharia de Dados desenvolvido em <b>Python</b> e <b>Pandas</b>. Focado em garantir resiliência extraindo dados de arquivos CSV locais, integrando com a API da OpenAI para transformação inteligente de marketing e estruturando o Load em JSON.</p>
+            <div class="acoes"><a class="botao" href="https://github.com/cruzpedro-dev/pipelineETLPython" target="_blank" rel="noopener"><span data-t="codigo">Ver código fonte</span> <i aria-hidden="true">↗</i></a></div>
+            <button class="botao mais" type="button"><span data-t="detalhes">Ver detalhes</span> <i aria-hidden="true">+</i></button>
+          </article>
+          <article class="cartao projeto voa" data-linha="a-dados" data-area="dados infra" data-id="4" style="--cor:var(--azul-claro)">
+            <b class="proj-num">04</b>
+            <div class="proj-info"><h3 data-t="p4t">Monitoramento Ativo &amp; BI</h3><ul class="tags"><li>Zabbix</li><li>MySQL</li><li>Power BI</li><li>Linux</li></ul></div>
+            <p class="proj-desc" data-t="p4d">Laboratório focado em <b>Business Intelligence</b>. Integração de métricas de infraestrutura extraídas de um servidor Linux via <b>Zabbix</b>, processadas em banco <b>MySQL</b> e visualizadas através de dashboards estratégicos no <b>Power BI</b>.</p>
+            <div class="acoes"><a class="botao" href="https://github.com/cruzpedro-dev/monitoramento-zabbix-powerbi.git" target="_blank" rel="noopener"><span data-t="codigo">Ver código fonte</span> <i aria-hidden="true">↗</i></a></div>
+            <button class="botao mais" type="button"><span data-t="detalhes">Ver detalhes</span> <i aria-hidden="true">+</i></button>
+          </article>
+          <article class="cartao projeto voa" data-linha="a-dados" data-area="backend dados" data-id="3" style="--cor:var(--verde);--cor-txt:var(--creme)">
+            <b class="proj-num">03</b>
+            <div class="proj-info"><h3 data-t="p3t">Sistema de Gestão (CLI)</h3><ul class="tags"><li>Python</li><li>SQLite</li><li>SQL</li></ul></div>
+            <p class="proj-desc" data-t="p3d">Aplicação de linha de comando desenvolvida em <b>Python</b> integrada a um banco de dados relacional <b>SQLite</b>. Foco em lógica de Back-end, estruturação de tabelas, chaves estrangeiras e operações de CRUD completas utilizando consultas avançadas em SQL.</p>
+            <div class="acoes"><a class="botao" href="https://github.com/cruzpedro-dev/projetoDados" target="_blank" rel="noopener"><span data-t="codigo">Ver código fonte</span> <i aria-hidden="true">↗</i></a></div>
+            <button class="botao mais" type="button"><span data-t="detalhes">Ver detalhes</span> <i aria-hidden="true">+</i></button>
+          </article>
+          <article class="cartao projeto voa" data-linha="a-web" data-area="web" data-id="2" style="--cor:var(--coral);--cor-txt:var(--creme)">
+            <b class="proj-num">02</b>
+            <div class="proj-info"><h3 data-t="p2t">Gestão Financeira Pessoal</h3><ul class="tags"><li>JavaScript</li><li>CSS</li><li>LocalStorage</li></ul></div>
             <p class="proj-desc" data-t="p2d">Dashboard interativo desenvolvido com <b>JavaScript</b> e <b>CSS</b>. A aplicação utiliza dados via <b>LocalStorage</b>, e sistema de onboarding personalizado.</p>
             <div class="acoes">
               <a class="botao botao-cheio" href="https://cruzpedro-dev.github.io/financeiro/" target="_blank" rel="noopener"><span data-t="acessar">Acessar aplicação</span> <i aria-hidden="true">↗</i></a>
@@ -172,36 +200,16 @@
             </div>
             <button class="botao mais" type="button"><span data-t="detalhes">Ver detalhes</span> <i aria-hidden="true">+</i></button>
           </article>
-          <article class="cartao projeto voa" data-linha="p3" data-id="3" style="--cor:var(--verde);--cor-txt:var(--creme)">
-            <div class="proj-topo"><b>03</b><ul class="tags"><li>Python</li><li>SQLite</li><li>SQL</li></ul></div>
-            <h3 data-t="p3t">Sistema de Gestão (CLI)</h3>
-            <p class="proj-desc" data-t="p3d">Aplicação de linha de comando desenvolvida em <b>Python</b> integrada a um banco de dados relacional <b>SQLite</b>. Foco em lógica de Back-end, estruturação de tabelas, chaves estrangeiras e operações de CRUD completas utilizando consultas avançadas em SQL.</p>
-            <div class="acoes"><a class="botao" href="https://github.com/cruzpedro-dev/projetoDados" target="_blank" rel="noopener"><span data-t="codigo">Ver código fonte</span> <i aria-hidden="true">↗</i></a></div>
-            <button class="botao mais" type="button"><span data-t="detalhes">Ver detalhes</span> <i aria-hidden="true">+</i></button>
-          </article>
-          <article class="cartao projeto voa" data-linha="p4" data-id="4" style="--cor:var(--azul-claro)">
-            <div class="proj-topo"><b>04</b><ul class="tags"><li>Zabbix</li><li>MySQL</li><li>Power BI</li><li>Linux</li></ul></div>
-            <h3 data-t="p4t">Monitoramento Ativo &amp; BI</h3>
-            <p class="proj-desc" data-t="p4d">Laboratório focado em <b>Business Intelligence</b>. Integração de métricas de infraestrutura extraídas de um servidor Linux via <b>Zabbix</b>, processadas em banco <b>MySQL</b> e visualizadas através de dashboards estratégicos no <b>Power BI</b>.</p>
-            <div class="acoes"><a class="botao" href="https://github.com/cruzpedro-dev/monitoramento-zabbix-powerbi.git" target="_blank" rel="noopener"><span data-t="codigo">Ver código fonte</span> <i aria-hidden="true">↗</i></a></div>
-            <button class="botao mais" type="button"><span data-t="detalhes">Ver detalhes</span> <i aria-hidden="true">+</i></button>
-          </article>
-          <article class="cartao projeto voa" data-linha="p5" data-id="5" style="--cor:var(--creme)">
-            <div class="proj-topo"><b>05</b><ul class="tags"><li>Python</li><li>Pandas</li><li>API OpenAI</li><li>JSON</li></ul></div>
-            <h3 data-t="p5t">Pipeline ETL com IA</h3>
-            <p class="proj-desc" data-t="p5d">Projeto de Engenharia de Dados desenvolvido em <b>Python</b> e <b>Pandas</b>. Focado em garantir resiliência extraindo dados de arquivos CSV locais, integrando com a API da OpenAI para transformação inteligente de marketing e estruturando o Load em JSON.</p>
-            <div class="acoes"><a class="botao" href="https://github.com/cruzpedro-dev/pipelineETLPython" target="_blank" rel="noopener"><span data-t="codigo">Ver código fonte</span> <i aria-hidden="true">↗</i></a></div>
-            <button class="botao mais" type="button"><span data-t="detalhes">Ver detalhes</span> <i aria-hidden="true">+</i></button>
-          </article>
-          <article class="cartao projeto voa" data-linha="p6" data-id="6" style="--cor:var(--azul);--cor-txt:var(--creme)">
-            <div class="proj-topo"><b>06</b><ul class="tags"><li data-t="tagia">Agentes de IA</li><li>Three.js</li><li>GSAP</li></ul></div>
-            <h3 data-t="p6t">Skill e agente de IA para sites 3D</h3>
-            <p class="proj-desc" data-t="p6d">Criação de uma <b>skill</b> e de um <b>agente de IA</b> que ensinam e executam a construção de sites imersivos em 3D, com manual, receitas de código, kit inicial e rotina de testes. O próprio agente construiu a primeira versão deste portfólio.</p>
+          <article class="cartao projeto voa" data-linha="a-backend" data-area="backend" data-id="1" style="--cor:var(--amarelo)">
+            <b class="proj-num">01</b>
+            <div class="proj-info"><h3 data-t="p1t">Calculadora de TDP e Setup</h3><ul class="tags"><li>C#</li><li>POO</li><li>terminal</li></ul></div>
+            <p class="proj-desc" data-t="p1d">Sistema de terminal desenvolvido em <b>C#</b> aplicando conceitos de Programação Orientada a Objetos (POO), Listas e Loops. O programa atua como um simulador de calculadora, somando valores de componentes e dimensionando a fonte de alimentação necessária em Watts.</p>
+            <div class="acoes"><a class="botao" href="https://github.com/cruzpedro-dev/CalcSetup.git" target="_blank" rel="noopener"><span data-t="codigo">Ver código fonte</span> <i aria-hidden="true">↗</i></a></div>
             <button class="botao mais" type="button"><span data-t="detalhes">Ver detalhes</span> <i aria-hidden="true">+</i></button>
           </article>
         </div>
       </div>
-      <div class="term" data-k="4" data-extra="2" aria-hidden="true"><div class="term-barra"><i></i><i></i><i></i><span>pedro@dev — psql portfolio</span></div><div class="term-tela"></div></div>
+      <div class="term" data-k="4" data-extra="3" aria-hidden="true"><div class="term-barra"><i></i><i></i><i></i><span>pedro@dev — psql portfolio</span></div><div class="term-tela"></div></div>
     </div>
   </section>
 
@@ -251,22 +259,22 @@
           <p class="subtitulo" data-t="sub6">Cursos e trilhas que concluí para ampliar meu domínio em dados, programação e inteligência artificial.</p></header>
         <div class="selos">
           <article class="cartao selo voa" data-linha="c1">
-            <div class="carimbo" style="--cor:var(--amarelo)"><b>8h</b></div>
-            <div class="selo-txt"><span class="etiqueta" data-t="cat1">programação</span>
+            <div class="selo-topo"><div class="carimbo" style="--cor:var(--amarelo)"><b>8h</b></div><span class="etiqueta" data-t="cat1">programação</span></div>
+            <div class="selo-txt">
               <h3 data-t="c1">Introdução à Programação com Python</h3>
               <p class="inst">Santander Open Academy · 8h</p>
               <a class="botao" href="arquivos/certificado-python.pdf" target="_blank" rel="noopener"><span data-t="vercert">Ver certificado</span> <i aria-hidden="true">↗</i></a></div>
           </article>
           <article class="cartao selo voa" data-linha="c2">
-            <div class="carimbo" style="--cor:var(--azul);--cor-txt:var(--creme)"><b>61h</b></div>
-            <div class="selo-txt"><span class="etiqueta" data-t="cat2">dados &amp; ML</span>
+            <div class="selo-topo"><div class="carimbo" style="--cor:var(--azul);--cor-txt:var(--creme)"><b>61h</b></div><span class="etiqueta" data-t="cat2">dados &amp; ML</span></div>
+            <div class="selo-txt">
               <h3 data-t="c2">Fundamentos de Engenharia de Dados e Machine Learning</h3>
               <p class="inst">TOTVS &amp; DIO · 61h</p>
               <a class="botao" href="arquivos/totvsdio.pdf" target="_blank" rel="noopener"><span data-t="vercert">Ver certificado</span> <i aria-hidden="true">↗</i></a></div>
           </article>
           <article class="cartao selo voa" data-linha="c3">
-            <div class="carimbo" style="--cor:var(--coral);--cor-txt:var(--creme)"><b>120h</b></div>
-            <div class="selo-txt"><span class="etiqueta" data-t="cat3">BI &amp; IA</span>
+            <div class="selo-topo"><div class="carimbo" style="--cor:var(--coral);--cor-txt:var(--creme)"><b>120h</b></div><span class="etiqueta" data-t="cat3">BI &amp; IA</span></div>
+            <div class="selo-txt">
               <h3 data-t="c3">Excel, Power BI &amp; IA Generativa</h3>
               <p class="inst">Alura · 120h</p>
               <a class="botao" href="arquivos/certificado-alura.pdf" target="_blank" rel="noopener"><span data-t="vercert">Ver certificado</span> <i aria-hidden="true">↗</i></a></div>
@@ -289,17 +297,22 @@
       <div class="cena-conteudo contato">
         <header class="cena-titulo ent"><span class="etiqueta" data-t="e7">07 · contato</span><h2 class="titulo" data-t="t7">Vamos conversar?</h2>
           <p class="subtitulo" data-t="sub7">Seja para discutir uma oportunidade de negócio, falar sobre código ou apenas trocar ideias sobre tecnologia. Minhas redes estão abertas!</p></header>
-        <div class="redes">
-          <a class="rede voa" data-linha="commit" href="https://www.linkedin.com/in/pedro-nunes-cruz-48832630a" target="_blank" rel="noopener" style="--cor:var(--azul);--cor-txt:var(--creme)"><b>LinkedIn</b><span>pedro-nunes-cruz</span><i aria-hidden="true">↗</i></a>
-          <a class="rede voa" data-linha="commit" href="https://github.com/cruzpedro-dev" target="_blank" rel="noopener" style="--cor:var(--tinta);--cor-txt:var(--creme)"><b>GitHub</b><span>cruzpedro-dev</span><i aria-hidden="true">↗</i></a>
-          <a class="rede voa" data-linha="commit" href="mailto:pedronunesc09@gmail.com" style="--cor:var(--amarelo)"><b>E-mail</b><span>pedronunesc09@gmail.com</span><i aria-hidden="true">↗</i></a>
-          <a class="rede voa" data-linha="commit" href="https://wa.me/5531997704089" target="_blank" rel="noopener" style="--cor:var(--verde);--cor-txt:var(--creme)"><b>WhatsApp</b><span data-t="msg">mandar mensagem</span><i aria-hidden="true">↗</i></a>
-          <a class="rede voa" data-linha="commit" href="https://www.instagram.com/_nunes000/" target="_blank" rel="noopener" style="--cor:var(--creme)"><b>Instagram</b><span>@_nunes000</span><i aria-hidden="true">↗</i></a>
+        <div class="console">
+          <div class="term" data-k="7" aria-hidden="true"><div class="term-barra"><i></i><i></i><i></i><span>pedro@dev — psql portfolio</span></div><div class="term-tela"></div></div>
+          <div class="redes">
+            <a class="rede voa" data-linha="sel" href="https://www.linkedin.com/in/pedro-nunes-cruz-48832630a" target="_blank" rel="noopener" style="--cor:var(--azul);--cor-txt:var(--creme)"><b> linkedin  </b><span>| pedro-nunes-cruz</span><i aria-hidden="true">↗</i></a>
+            <a class="rede voa" data-linha="sel" href="https://github.com/cruzpedro-dev" target="_blank" rel="noopener" style="--cor:var(--creme)"><b> github    </b><span>| cruzpedro-dev</span><i aria-hidden="true">↗</i></a>
+            <a class="rede voa" data-linha="sel" href="mailto:pedronunesc09@gmail.com" style="--cor:var(--amarelo)"><b> e-mail    </b><span>| pedronunesc09@gmail.com</span><i aria-hidden="true">↗</i></a>
+            <a class="rede voa" data-linha="sel" href="https://wa.me/5531997704089" target="_blank" rel="noopener" style="--cor:var(--verde);--cor-txt:var(--creme)"><b> whatsapp  </b><span>| <span data-t="msg">mandar mensagem</span></span><i aria-hidden="true">↗</i></a>
+            <a class="rede voa" data-linha="sel" href="https://www.instagram.com/_nunes000/" target="_blank" rel="noopener" style="--cor:var(--coral);--cor-txt:var(--creme)"><b> instagram </b><span>| @_nunes000</span><i aria-hidden="true">↗</i></a>
+            <p class="redes-fim" data-t="l5">(5 linhas)</p>
+          </div>
         </div>
-        <p class="obrigado ent" data-t="obrigado">Obrigado pela visita!</p>
-        <footer class="rodape ent" data-t="rodape">Desenvolvido com dedicação e código. © 2026 Pedro Nunes Cruz. Todos os direitos reservados.</footer>
+        <div class="despedida ent">
+          <p class="obrigado" data-t="obrigado">Obrigado pela visita!</p>
+          <footer class="rodape" data-t="rodape">Desenvolvido com dedicação e código. © 2026 Pedro Nunes Cruz. Todos os direitos reservados.</footer>
+        </div>
       </div>
-      <div class="term" data-k="7" aria-hidden="true"><div class="term-barra"><i></i><i></i><i></i><span>pedro@dev — psql portfolio</span></div><div class="term-tela"></div></div>
     </div>
   </section>
 </main>

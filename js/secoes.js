@@ -1,7 +1,7 @@
 import { ESTADO } from './estado.js';
 import { TERMS, digitar, acender, digitarExtra, retanguloDaLinha } from './terminal.js';
 import { linguaAtual } from './idioma.js';
-import { sqlK, sqlOk, PROMPT_SQL } from './textos.js';
+import { sqlK, sqlS, sqlOk, PROMPT_SQL, PROMPT_CONT, nomeArea } from './textos.js';
 
 /* =====================================================================
    SEÇÕES: quando uma seção entra na tela, ela monta SOZINHA (uma linha do tempo
@@ -55,10 +55,10 @@ export function iniciarModal(lenis) {
   const aberta = () => !m.hidden;
 
   function abrir(card) {
-    q('#modal-num').textContent = card.querySelector('.proj-topo b').textContent;
+    q('#modal-num').textContent = card.querySelector('.proj-num').textContent;
     q('#modal-titulo').innerHTML = card.querySelector('h3').innerHTML;
     q('#modal-desc').innerHTML = card.querySelector('.proj-desc').innerHTML;
-    q('#modal-tags').replaceChildren(...[...card.querySelectorAll('.proj-topo .tags li')].map((li) => li.cloneNode(true)));
+    q('#modal-tags').replaceChildren(...[...card.querySelectorAll('.proj-info .tags li')].map((li) => li.cloneNode(true)));
     q('#modal-acoes').replaceChildren(...[...card.querySelectorAll('.acoes > a')].map((a) => a.cloneNode(true)));
     m.style.setProperty('--cor', card.style.getPropertyValue('--cor'));
     m.style.setProperty('--cor-txt', card.style.getPropertyValue('--cor-txt') || 'var(--tinta)');
@@ -130,4 +130,23 @@ export function iniciarModal(lenis) {
     addEventListener('keydown', (e) => { if (e.key === 'Escape') fecharCV(); });
   }
   return { fechar, aberta };
+}
+
+/* ---------- filtro dos projetos por área: o terminal digita o SELECT ... WHERE ---------- */
+export function iniciarFiltro() {
+  const botoes = [...document.querySelectorAll('.filtro')], cards = [...document.querySelectorAll('.projeto')];
+  botoes.forEach((b) => b.addEventListener('click', () => {
+    const f = b.dataset.f, en = linguaAtual() === 'en';
+    botoes.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    const vis = cards.filter((c) => f === 'todos' || c.dataset.area.split(' ').includes(f));
+    cards.forEach((c) => { c.hidden = !vis.includes(c); });
+    if (!ESTADO.reduzMovimento) gsap.fromTo(vis, { autoAlpha: 0, y: 12 }, { autoAlpha: 1, y: 0, duration: 0.3, stagger: 0.04, ease: 'power2.out', clearProps: 'transform' });
+    if (TERMS[4].pronto) {
+      const tab = en ? 'projects' : 'projetos';
+      const cmd = f === 'todos' ? `${sqlK('SELECT')} * ${sqlK('FROM')} ${tab};`
+        : [`${sqlK('SELECT')} * ${sqlK('FROM')} ${tab}`, `  ${sqlK('WHERE')} area = ${sqlS("'" + nomeArea(f, en ? 'en' : 'pt') + "'")};`];
+      digitarExtra(4, cmd, sqlOk(en ? `(${vis.length} rows)` : `(${vis.length} linhas)`), null, PROMPT_SQL, PROMPT_CONT);
+    }
+    ScrollTrigger.refresh();
+  }));
 }
