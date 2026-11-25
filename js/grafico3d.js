@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { ESTADO, limitar, suavizar, salto, escalonar } from './estado.js';
+import { ESTADO, limitar, suavizar, salto, escalonar } from './estado.js?v=20261125b';
 
 /* =====================================================================
    GRÁFICO 3D DAS SKILLS (estilo do esboço D)

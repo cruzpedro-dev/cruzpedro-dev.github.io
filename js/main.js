@@ -1,10 +1,10 @@
-import { ESTADO } from './estado.js';
-import { criarTerminais, TERMS, digitarExtra } from './terminal.js';
-import { aplicarIdioma, idiomaSalvo, linguaAtual } from './idioma.js';
-import { montar, iniciarModal, iniciarFiltro, secaoDe } from './secoes.js';
-import { criarGrafico } from './grafico3d.js';
-import { iniciarPreloader } from './efeitos.js';
-import { sqlK, sqlS, sqlOk, PROMPT_SQL, contarProjetos } from './textos.js';
+import { ESTADO } from './estado.js?v=20261125b';
+import { criarTerminais, TERMS, digitarExtra } from './terminal.js?v=20261125b';
+import { aplicarIdioma, idiomaSalvo, linguaAtual } from './idioma.js?v=20261125b';
+import { montar, iniciarModal, iniciarFiltro, secaoDe } from './secoes.js?v=20261125b';
+import { criarGrafico } from './grafico3d.js?v=20261125b';
+import { iniciarPreloader } from './efeitos.js?v=20261125b';
+import { sqlK, sqlS, sqlOk, PROMPT_SQL, contarProjetos } from './textos.js?v=20261125b';
 
 /* =====================================================================
    LIGA TUDO: terminais, idioma, rolagem suave (Lenis), gatilhos das seções,

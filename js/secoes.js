@@ -1,7 +1,7 @@
-import { ESTADO } from './estado.js';
-import { TERMS, digitar, acender, digitarExtra, retanguloDaLinha } from './terminal.js';
-import { linguaAtual } from './idioma.js';
-import { sqlK, sqlS, sqlOk, PROMPT_SQL, PROMPT_CONT, nomeArea } from './textos.js';
+import { ESTADO } from './estado.js?v=20261125b';
+import { TERMS, digitar, acender, digitarExtra, retanguloDaLinha } from './terminal.js?v=20261125b';
+import { linguaAtual } from './idioma.js?v=20261125b';
+import { sqlK, sqlS, sqlOk, PROMPT_SQL, PROMPT_CONT, nomeArea } from './textos.js?v=20261125b';
 
 /* =====================================================================
    SEÇÕES: quando uma seção entra na tela, ela monta SOZINHA (uma linha do tempo

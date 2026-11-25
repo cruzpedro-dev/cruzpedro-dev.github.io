@@ -1,5 +1,5 @@
-import { EN, UI } from './textos.js';
-import { atualizarIdioma } from './terminal.js';
+import { EN, UI } from './textos.js?v=20261125b';
+import { atualizarIdioma } from './terminal.js?v=20261125b';
 
 /* =====================================================================
    IDIOMA (PT / EN). O português é o texto que já está no HTML (guardado em data-pt

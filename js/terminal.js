@@ -1,4 +1,4 @@
-import { TERMINAL, COR } from './textos.js';
+import { TERMINAL, COR } from './textos.js?v=20261125b';
 
 /* =====================================================================
    TERMINAIS: cada seção tem o seu. As linhas existem desde o começo (altura fixa,
@@ -72,7 +72,8 @@ export function acender(k, chave) {
   const d = TERMS[k].linhas[i];
   d.classList.add('acesa'); d.style.background = linhasDe(k)[i].luz; d.style.color = COR.tinta;
 }
-export const retanguloDaLinha = (k, chave) => TERMS[k].linhas[indiceDaChave(k, chave)].getBoundingClientRect();
+// se a linha não existir, o bloco sai do meio do terminal (nunca trava a montagem da seção)
+export const retanguloDaLinha = (k, chave) => (TERMS[k].linhas[indiceDaChave(k, chave)] || TERMS[k].el).getBoundingClientRect();
 
 // digita um comando extra nas linhas reservadas do fim do terminal (SET lang..., SELECT ... WHERE id...).
 // cmd pode ser uma lista: cada parte vai numa linha (a 2ª em diante com o prompt de continuação "portfolio-#").
