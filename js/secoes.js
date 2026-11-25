@@ -105,7 +105,12 @@ export function iniciarModal(lenis) {
   if (cv) {
     const quadroPdf = cv.querySelector('iframe');
     const abrirCV = () => {
-      if (!quadroPdf.getAttribute('src')) quadroPdf.setAttribute('src', 'arquivos/Curriculo.pdf#view=FitH');   // carrega só na 1ª vez
+      // o currículo segue o idioma do site: PT → Curriculo.pdf · EN → Resume.pdf
+      const en = linguaAtual() === 'en';
+      const arquivo = en ? 'arquivos/Resume.pdf' : 'arquivos/Curriculo.pdf';
+      if (quadroPdf.getAttribute('src') !== arquivo + '#view=FitH') quadroPdf.setAttribute('src', arquivo + '#view=FitH');
+      cv.querySelectorAll('.cv-acoes a').forEach((a) => a.setAttribute('href', arquivo));
+      cv.querySelector('a[download]').setAttribute('download', en ? 'Resume-Pedro-Nunes-Cruz.pdf' : 'Curriculo-Pedro-Nunes-Cruz.pdf');
       foco = document.activeElement;
       cv.hidden = false;
       document.body.classList.add('modal-aberto');

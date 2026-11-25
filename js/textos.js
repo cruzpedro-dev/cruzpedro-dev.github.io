@@ -76,7 +76,8 @@ export const TERMINAL = {
       { tipo: 'out', txt: '  3 | Sistema de Gestão (CLI) | Python', chave: 'p3', luz: COR.verde },
       { tipo: 'out', txt: '  4 | Monitoramento & BI      | Zabbix', chave: 'p4', luz: COR.azulClaro },
       { tipo: 'out', txt: '  5 | Pipeline ETL com IA     | Python', chave: 'p5', luz: COR.creme },
-      { tipo: 'out', txt: sqlOk('(5 linhas)') }
+      { tipo: 'out', txt: '  6 | Skill + agente de IA    | IA', chave: 'p6', luz: COR.azul },
+      { tipo: 'out', txt: sqlOk('(6 linhas)') }
     ],
     [
       { tipo: 'com', txt: '-- 05 · skills & tecnologias' },
@@ -168,7 +169,8 @@ export const TERMINAL = {
       { tipo: 'out', txt: '  3 | Management System (CLI) | Python', chave: 'p3', luz: COR.verde },
       { tipo: 'out', txt: '  4 | Monitoring & BI         | Zabbix', chave: 'p4', luz: COR.azulClaro },
       { tipo: 'out', txt: '  5 | ETL Pipeline with AI    | Python', chave: 'p5', luz: COR.creme },
-      { tipo: 'out', txt: sqlOk('(5 rows)') }
+      { tipo: 'out', txt: '  6 | AI skill + agent        | AI', chave: 'p6', luz: COR.azul },
+      { tipo: 'out', txt: sqlOk('(6 rows)') }
     ],
     [
       { tipo: 'com', txt: '-- 05 · skills & technologies' },
@@ -231,8 +233,8 @@ export const EN = {
   si2: 'Ongoing degree focused on software development, databases and data engineering, combining academic theory with day-to-day professional practice.',
   e3: '03 · professional experience', t3: 'Professional experience.',
   per1: 'Aug/2026 – present', atual: 'current', per2: 'Jan/2026 – May/2026', aprendiz: 'apprentice',
-  fdc: 'Intern – Academic Operations Support',
-  fdc1: 'Supporting and developing internal solutions through the TOTVS ERP. Building routine automations with Python and structuring data analyses and dashboards with Excel and Power BI.',
+  fdc: 'Academic Operations Support Intern',
+  fdc1: 'Development of academic process automations with Power Automate and Python, integrating SharePoint, Outlook, Planner and the TOTVS ERP in flows that are now in production. Data extraction and processing with SQL, creation of internal web tools in HTML and JavaScript, modeling and maintenance of Power BI dashboards, and use of generative AI to document and standardize team processes.',
   mel: 'Infrastructure Assistant / IT Support', mel0: 'Mellore Alimentos (Apprentice)',
   mel1: 'Hands-on work supporting and maintaining IT infrastructure, including basic network administration, Active Directory and corporate hardware.',
   e4: '04 · my projects', t4: 'My projects.', detalhes: 'View details', codigo: 'View source code', acessar: 'Open application',
@@ -246,6 +248,9 @@ export const EN = {
   p4d: 'Lab focused on <b>Business Intelligence</b>. Infrastructure metrics extracted from a Linux server through <b>Zabbix</b>, processed in a <b>MySQL</b> database and visualized in strategic <b>Power BI</b> dashboards.',
   p5t: 'ETL Pipeline with AI',
   p5d: 'Data Engineering project built with <b>Python</b> and <b>Pandas</b>. Focused on resilience: extracting data from local CSV files, integrating with the OpenAI API for intelligent marketing transformation and structuring the Load into JSON.',
+  p6t: 'AI skill and agent for 3D websites', tagia: 'AI agents',
+  p6d: 'Created a <b>skill</b> and an <b>AI agent</b> that teach and carry out the construction of immersive 3D websites, with a manual, code recipes, a starter kit and a testing routine. The agent itself built the first version of this portfolio.',
+  ss1: 'Teamwork', ss2: 'Commitment', ss3: 'Responsibility', ss4: 'Fast learner', ss5: 'Adaptability', ss6: 'Problem solving', ss7: 'Eagerness to learn',
   mtec: 'Technologies', mlinks: 'Links',
   e5: '05 · skills & technologies', t5: 'Skills & technologies.',
   sferr: 'Tools I use', svers: 'Version control', sinfra: 'Infrastructure', slogica: 'Programming Logic', sia: 'Generative AI',
